@@ -1,0 +1,168 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #eef0f3;
+  --ink: #1b2430;
+  --muted: #5e6875;
+  --line: #d5d9df;
+  --row: #ffffff;
+  --focus: #1f5fa8;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #151a21;
+    --ink: #e6e9ed;
+    --muted: #98a1ad;
+    --line: #2a313b;
+    --row: #1c222b;
+    --focus: #7fb0ec;
+    color-scheme: dark;
+  }
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- launcher ---------- */
+
+.hub {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: calc(env(safe-area-inset-top) + 40px) 16px calc(env(safe-area-inset-bottom) + 40px);
+}
+
+.hub-head h1 {
+  font-size: 44px;
+  line-height: 1;
+  font-weight: 750;
+  letter-spacing: -0.035em;
+  margin: 0;
+}
+
+.hub-head p {
+  margin: 8px 0 0;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.hub-group {
+  margin-top: 36px;
+}
+
+.hub-group h2 {
+  font-size: 15px;
+  font-weight: 650;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+
+.hub-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.hub-row {
+  display: grid;
+  gap: 3px;
+  padding: 14px 16px 14px 18px;
+  background: var(--row);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--spine, var(--muted));
+  border-radius: 6px 14px 14px 6px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.hub-row:active {
+  transform: scale(0.99);
+}
+
+.hub-row:focus-visible,
+.hub-home:focus-visible,
+.hub-empty a:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.hub-title {
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.hub-desc {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.hub-none,
+.hub-empty,
+.hub-loading {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 48px 16px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.hub-empty a {
+  color: var(--focus);
+}
+
+/* ---------- way back from inside an app ---------- */
+
+.hub-home {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 50;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(27, 36, 48, 0.78);
+  color: #fff;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+.hub-home svg {
+  fill: currentColor;
+}
+
+.hub-home {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.hub-home.is-hidden {
+  transform: translateY(80px);
+  opacity: 0;
+}
+
+.hub-home.is-hidden:focus-visible {
+  transform: none;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hub-row:active {
+    transform: none;
+  }
+  .hub-home {
+    transition: none;
+  }
+}
